@@ -1,6 +1,8 @@
 package editor;
 
 import editor.commands.CommandFactory;
+import editor.memento.Caretaker;
+import editor.memento.Originator;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,6 +20,10 @@ public class ConsoleEditor implements Editor {
 
     private final CommandFactory commandFactory = new CommandFactory();
     private ArrayList<String> documentLines = new ArrayList<String>();
+    //Creo un objeto tipo Originator para crear los puntos de restauración
+    Originator originator = new Originator();
+    //Creo un ojbeto tipo CareTaker para guardar el histoiral
+    Caretaker careTaker = new Caretaker();
 
     @Override
     public void run() {
@@ -27,6 +33,8 @@ public class ConsoleEditor implements Editor {
             try {
                 Command command = commandFactory.getCommand(commandLine);
                 command.execute(documentLines);
+                //Creo un punto de restauración siempre haga lo que haga
+                careTaker.add(originator.getState());
             } catch (BadCommandException e) {
                 printErrorToConsole("Bad command");
             } catch (ExitException e) {
@@ -64,6 +72,7 @@ public class ConsoleEditor implements Editor {
         printLnToConsole("To add new line -> a \"your text\"");
         printLnToConsole("To update line  -> u [line number] \"your text\"");
         printLnToConsole("To delete line  -> d [line number]");
+        printLnToConsole("To restore line  -> undo");
     }
 
     private void printErrorToConsole(String message) {
