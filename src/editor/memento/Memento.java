@@ -7,14 +7,13 @@ import java.util.Map;
 
 public class Memento {
 
-    private ArrayList<String> mementos;
+    private Map<String, Object> state;
 
-    public Memento(ArrayList<String> documentLines){
-        this.mementos = documentLines;
+    public Memento(Map<String, Object> state){
+        this.state = state;
     }
-
-    public ArrayList<String>  getState(){
-        return mementos;
+    //Devuelve el último estado del memento
+    public Map<String, Object> getState(){
+        return (Map<String, Object>) state.get(state.size()-1);
     }
-
 }

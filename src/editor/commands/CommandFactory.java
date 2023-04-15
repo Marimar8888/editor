@@ -26,7 +26,7 @@ public class CommandFactory {
     }
 
     private Command createUndoCommand() {
-        Memento memento = originator.restore(careTaker.pop());
+        String memento = originator.getState();
         return new UndoCommand(memento);
     }
 
@@ -37,10 +37,12 @@ public class CommandFactory {
 
     private Command createUpdateCommand(String lineNumber, String text) {
         int number = Integer.parseInt(lineNumber);
+
         return new UpdateCommand(text, number);
     }
 
     private Command createAppendCommand(String text) {
+
         return new AppendCommand(text);
     }
 

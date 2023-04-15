@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Caretaker {
-    //atributo List de tipo Memento para guardar los historiales de puntos de restauracion
-    private List<Memento> mementos = new ArrayList<Memento>();
+    //Gestión de puntos de restauración como una pila
+    List<Memento> mementos = new ArrayList<>();
+    Memento memento;
 
-    //Metodo para añadir un punto de restauración al listado
-    public void add(Memento memento){
+
+    //Metodo para añadir un nuevo punto de restauración al listado
+    public void push(Memento memento){
         mementos.add(memento);
     }
 
-    //Restaurar punto de restauración eliminando el último cambio
-    public Memento pop(){
-        if(mementos.size()>0){
-            Memento memento = mementos.get(mementos.size()-1);
+    //recupero el último punto de restauración y lo devuelvo
+    public Memento get(){
+        if(mementos.size()!=0){
+            memento = mementos.get(mementos.size()-1);
             mementos.remove(mementos.size()-1);
             return memento;
+        }else{
+            return null;
         }
-        return null;
     }
+
 }

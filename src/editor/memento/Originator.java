@@ -3,20 +3,34 @@ package editor.memento;
 import java.util.*;
 
 public class Originator {
-    private List<String> mementos = new ArrayList<>();
+    private List<String> operations = new ArrayList<>();
+
+    //Restaurar un punto de restauración
+    public void restore(Memento memento){
+        if(memento !=null){
+            operations = (List<String>) memento.getState().get("operations");
+        }
+    }
 
     //Crear un punto de restauración, genera el objeto tipo Memento
-    public Memento getState(){
-        ArrayList<String> momento = new ArrayList<>(); //Se guarda en un HashMap porque tenemos dos atributos un String y un ArrayList
-        momento.add(String.valueOf(new ArrayList<>(mementos)));
-        return  new Memento(momento);
+    public Memento setState(ArrayList documentList){
+        Map<String, Object> state = new HashMap<>(); //Se guarda en un HashMap porque tenemos dos atributos un String y un ArrayL
+        state.put("operations", new ArrayList<>(documentList));
+        return  new Memento(state);
+
     }
-    //Restaurar un punto de restauración
-    public Memento restore(Memento memento){
-        if(memento !=null){
-            mementos = memento.getState();
+    //Crear un punto de restauración, genera el objeto tipo Memento
+    public String getState(){
+        //return  operations.get(operations.size()-1);
+        if(operations.size()!=0){
+            String memento = operations.get(operations.size()-1);
+            operations.remove(operations.size()-1);
+            return memento;
+        }else{
+            return null;
         }
-        return memento;
     }
+
+
 }
 

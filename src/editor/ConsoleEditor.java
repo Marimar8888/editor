@@ -2,6 +2,7 @@ package editor;
 
 import editor.commands.CommandFactory;
 import editor.memento.Caretaker;
+import editor.memento.Memento;
 import editor.memento.Originator;
 
 import java.util.ArrayList;
@@ -32,9 +33,15 @@ public class ConsoleEditor implements Editor {
             String commandLine = waitForNewCommand();
             try {
                 Command command = commandFactory.getCommand(commandLine);
-                command.execute(documentLines);
-                //Creo un punto de restauración siempre haga lo que haga
-                careTaker.add(originator.getState());
+                if(!commandLine.equals("undo")){
+                    command.execute(documentLines);
+                    //Creo un punto de restauración siempre excepto cuando pulse undo
+                    careTaker.push(originator.setState(documentLines));
+                }else{
+                    String state = originator.getState();
+                    //documentLines= state;
+                    command.execute(documentLines);
+                }
             } catch (BadCommandException e) {
                 printErrorToConsole("Bad command");
             } catch (ExitException e) {
