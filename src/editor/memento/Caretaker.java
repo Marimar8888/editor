@@ -15,12 +15,19 @@ public class Caretaker {
     }
 
     //recupero el último punto de restauración y lo devuelvo
-    public Memento get(){
-        if(mementos.size()!=0){
-            memento = mementos.get(mementos.size()-1);
-            mementos.remove(mementos.size()-1);
-            return memento;
-        }else{
+    public Memento pop() {
+        if (mementos.size() != 0) {
+            if (mementos.size() > 1) {
+
+                Memento mementoList = mementos.get(mementos.size() - 2);
+                mementos.remove(mementos.size() - 1);
+                return mementoList;
+            } else {
+                mementos.remove(mementos.size() - 1);
+                return null;
+            }
+
+        } else {
             return null;
         }
     }

@@ -38,9 +38,10 @@ public class ConsoleEditor implements Editor {
                     //Creo un punto de restauración siempre excepto cuando pulse undo
                     careTaker.push(originator.setState(documentLines));
                 }else{
-                    String state = originator.getState();
-                    //documentLines= state;
-                    command.execute(documentLines);
+                    documentLines.clear();
+                    Memento mementoList = careTaker.pop();
+
+                   // command.execute(mementoList);
                 }
             } catch (BadCommandException e) {
                 printErrorToConsole("Bad command");

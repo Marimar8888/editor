@@ -5,12 +5,6 @@ import java.util.*;
 public class Originator {
     private List<String> operations = new ArrayList<>();
 
-    //Restaurar un punto de restauración
-    public void restore(Memento memento){
-        if(memento !=null){
-            operations = (List<String>) memento.getState().get("operations");
-        }
-    }
 
     //Crear un punto de restauración, genera el objeto tipo Memento
     public Memento setState(ArrayList documentList){
@@ -28,6 +22,14 @@ public class Originator {
             return memento;
         }else{
             return null;
+        }
+    }
+    //Crear un punto de restauración, genera el objeto tipo Memento
+    public ArrayList restore(Memento memento){
+        if(memento !=null){
+            return (ArrayList) (operations = (List<String>) memento.getState().get("operations"));
+        }else{
+            return (ArrayList) (operations = new ArrayList<>());
         }
     }
 
