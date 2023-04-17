@@ -24,7 +24,7 @@ Esta interface esta implementada en las clases AppendCommand, DeleteCommand.... 
 
 ## UndoCommand
 
-Defino el método de la interface Command, donde recibo el nuevo estado del ArrayList de mementos y los actualizo en el ArrayList documentLines, que es lo que finalmente se imprime por pantalla.
+Defino el método de la interface Command, donde recibo el nuevo estado del ArrayList de mementos y los actualizo en el ArrayList documentLines, que es lo que finalmente se imprime por consola.
 
 ##CommandFactory
 
