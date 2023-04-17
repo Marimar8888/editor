@@ -14,7 +14,7 @@ Para este ejercicio he utilizado el patrón de diseño estructural Memento.
 
 Cada vez que se ingresa por consola un comando que no sea 'undo', realiza una actualización del listado de estados tipo Memento.
 
-En el caso de introducir 'undo', recuperaría, el estado anterior al actual y lo actualizaría en el arrayList documentLines, además elimina el último estado dejando el lismado de mementos igual que el estado actual del documento-ArrayList (documentLines).
+En el caso de introducir 'undo', recuperaría, el estado anterior al actual y lo actualizaría en el arrayList documentLines, además elimina el último estado dejando el listado de mementos igual que el estado actual del documento-ArrayList (documentLines).
 
 Desde aquí se llama al método execute de la interface Command.
 
