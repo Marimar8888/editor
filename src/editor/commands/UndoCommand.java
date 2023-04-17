@@ -4,20 +4,16 @@ import editor.Command;
 import editor.memento.Memento;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UndoCommand  implements  Command{
-    private final String memento;
+    private final ArrayList<String> documentLines;
+    public UndoCommand(ArrayList<String> documentLines) {
 
-    public UndoCommand(String memento) {
-        this.memento = memento;
+        this.documentLines = documentLines;
     }
-
     @Override
     public void execute(ArrayList<String> documentLines) {
-      /*  if (documentLines.size() > 0){
-            documentLines.clear();
-            //Se guarda en un HashMap porque tenemos dos atributos un String y un ArrayL
-            documentLines.add(memento.toString());
-        }*/
+        documentLines = documentLines;
     }
 }

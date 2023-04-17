@@ -5,6 +5,9 @@ import editor.memento.Caretaker;
 import editor.memento.Memento;
 import editor.memento.Originator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CommandFactory {
     private static final CommandParser commandParser = new CommandParser();
 
@@ -26,8 +29,8 @@ public class CommandFactory {
     }
 
     private Command createUndoCommand() {
-        String memento = originator.getState();
-        return new UndoCommand(memento);
+        ArrayList memento = null;
+        return new UndoCommand(null);
     }
 
     private Command createDeleteCommand(String lineNumber) {
@@ -37,7 +40,6 @@ public class CommandFactory {
 
     private Command createUpdateCommand(String lineNumber, String text) {
         int number = Integer.parseInt(lineNumber);
-
         return new UpdateCommand(text, number);
     }
 

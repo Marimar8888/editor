@@ -39,9 +39,10 @@ public class ConsoleEditor implements Editor {
                     careTaker.push(originator.setState(documentLines));
                 }else{
                     documentLines.clear();
+                    //Recupero el último punto de restauración y lo elimino de la lista de versiones (mementos)
                     Memento mementoList = careTaker.pop();
-
-                   // command.execute(mementoList);
+                    documentLines= (ArrayList<String>) originator.restore(mementoList);
+                    command.execute(documentLines);
                 }
             } catch (BadCommandException e) {
                 printErrorToConsole("Bad command");
@@ -52,7 +53,6 @@ public class ConsoleEditor implements Editor {
             showHelp();
         }
     }
-
     private void showDocumentLines(ArrayList<String> textLines) {
         if (textLines.size() > 0){
             setTextColor(TEXT_YELLOW);
